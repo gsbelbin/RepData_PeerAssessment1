@@ -25,7 +25,7 @@ data$date <- ymd(data$date)
 data1 <- summarise(group_by(data, date), Total = sum(steps, na.rm = TRUE))
 ```
 Total number steps per day is shown in the histogram below
-```{r plothist, echo = TRUE}
+```{r plothist, echo = TRUE, fig.path = "figure/"}
 hist(data1$Total, main = "Histogram of Total Steps per Day", xlab = "Total Steps per Day")
 MeanSteps <- round(mean(data1$Total), digits = 0)
 MedianSteps <- median(data1$Total)
@@ -36,7 +36,7 @@ The median number of steps taken per day is `r MedianSteps` steps.
 
 
 ## What is the average daily activity pattern?
-```{r plotsteps, echo = TRUE}
+```{r plotsteps, echo = TRUE, fig.path = "figure/"}
 data2 <- summarise(group_by(data, interval), IntervalMeanSteps = mean(steps, na.rm = TRUE))
 
 plot(data2$interval, data2$IntervalMeanSteps, type = "l", main = "Average Number of Steps in Each 5 Minute Interval",
@@ -53,7 +53,7 @@ This interval has `r MaxSteps` steps
 The total number of missing values in the dataset is `r sum(is.na(data$steps))`  
 These missing values may be replaced with the mean number of steps for the corresponding 5 minute interval over all days.  
 
-```{r missingvalues, echo = TRUE}
+```{r missingvalues, echo = TRUE, fig.path = "figure/"}
 datanew <- data
 datanew$steps <- ifelse(is.na(data$steps) == TRUE, data2$IntervalMeanSteps[data2$interval %in% data$interval], data$steps)
 datanew1 <- summarise(group_by(datanew, date), Total = sum(steps, na.rm = TRUE))
@@ -67,7 +67,7 @@ The median number of steps taken per day is `r NewMedianSteps` steps with the mi
 As can be seen, by replacing the missing values with the corresponding mean for the corresponding 5 minute period both the mean and median have increased.  
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r activitylevels, echo = TRUE}
+```{r activitylevels, echo = TRUE, fig.path = "figure/"}
 data$daytype <- ifelse(weekdays(data$date) %in% c("Saturday", "Sunday"), "weekend", "weekday")
 data$daytype <- as.factor(data$daytype)
 data3 <- summarise(group_by(data, interval, daytype), DayMeanSteps = mean(steps, na.rm = TRUE))

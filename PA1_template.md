@@ -26,7 +26,7 @@ Total number steps per day is shown in the histogram below
 hist(data1$Total, main = "Histogram of Total Steps per Day", xlab = "Total Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/plothist-1.png)<!-- -->
+![](figure/plothist-1.png)<!-- -->
 
 ```r
 MeanSteps <- round(mean(data1$Total), digits = 0)
@@ -46,7 +46,7 @@ plot(data2$interval, data2$IntervalMeanSteps, type = "l", main = "Average Number
      xlab = "Time (minutes)", ylab = "Average Number of Steps")
 ```
 
-![](PA1_template_files/figure-html/plotsteps-1.png)<!-- -->
+![](figure/plotsteps-1.png)<!-- -->
 
 ```r
 MaxInterval <- data2[data2$IntervalMeanSteps == max(data2$IntervalMeanSteps), 1]
@@ -68,7 +68,7 @@ datanew1 <- summarise(group_by(datanew, date), Total = sum(steps, na.rm = TRUE))
 hist(datanew1$Total, main = "Histogram of Total Steps per Day (missing data filled)", xlab = "Total Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/missingvalues-1.png)<!-- -->
+![](figure/missingvalues-1.png)<!-- -->
 
 ```r
 NewMeanSteps <- round(mean(datanew1$Total), digits = 0)
@@ -90,7 +90,7 @@ xyplot(data3$DayMeanSteps ~ data3$interval | data3$daytype, layout = c(1, 2), ty
        main = "Comparison of Mean Number of Steps per 5 Minute Interval \nfor Weekdays vs Weekend Days")
 ```
 
-![](PA1_template_files/figure-html/activitylevels-1.png)<!-- -->
+![](figure/activitylevels-1.png)<!-- -->
 
 
 
